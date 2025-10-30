@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ABHINAV P K — Portfolio</title>
+  <style>
+    :root{
+      --bg:#0f1115; --card:#15171b; --muted:#9aa1a6; --accent:#00e5ff; --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#e6eef3;background:linear-gradient(180deg,#071018 0%,var(--bg) 100%);}
+    a{color:var(--accent);text-decoration:none}
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(8,10,14,0.6), transparent);backdrop-filter: blur(6px);padding:10px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#6df3ff);display:grid;place-items:center;color:#071018;font-weight:700}
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{padding:8px 10px;border-radius:8px;font-weight:600;color:var(--muted);transition:all .2s}
+    nav a:hover{color:var(--accent);background:var(--glass)}
+    .hero{min-height:78vh;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:40px 6vw}
+
+    .intro{max-width:760px}
+    h1{font-size:2.2rem;margin:0 0 8px;color:#fff;letter-spacing:0.2px}
+    .subtitle{color:var(--accent);font-weight:700;margin-bottom:12px}
+    p.lead{color:var(--muted);line-height:1.6;font-size:1rem}
+    .actions{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn{background:var(--accent);color:#031018;padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+
+    /* Card */
+    .card{background:linear-gradient(180deg,var(--card),#0f1215);border-radius:14px;padding:18px;box-shadow:0 8px 30px rgba(2,6,10,0.6);}
+    .profile-card{margin-right:0;display:flex;flex-direction:column;gap:12px;padding:22px}
+    .avatar{height:120px;width:120px;border-radius:18px;background:linear-gradient(135deg,#063041, #004b57);display:grid;place-items:center;font-weight:800;font-size:1.25rem;color:var(--accent)}
+    .meta{color:var(--muted);font-size:0.95rem}
+
+    /* Sections */
+    main{padding:28px 6vw 80px;display:grid;gap:28px}
+    section.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    section h2{color:var(--accent);margin:0 0 8px}
+
+    /* Skill bars */
+    .skill{background:var(--glass-2);padding:10px;border-radius:10px}
+    .skill .label{display:flex;justify-content:space-between;font-weight:700;color:#dce9ef}
+    .bar{height:10px;background:rgba(255,255,255,0.05);border-radius:999px;margin-top:8px;overflow:hidden}
+    .bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#6df3ff);width:0%;transition:width .8s ease}
+
+    /* Projects */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));cursor:pointer;border:1px solid rgba(255,255,255,0.02);transition:transform .18s,box-shadow .18s}
+    .project:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,0.6)}
+    .project h3{margin:0 0 6px;font-size:1rem}
+    .project p{margin:0;color:var(--muted);font-size:0.92rem}
+
+    /* Footer */
+    footer{padding:24px 6vw;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+    /* Responsive */
+    @media (max-width:980px){.hero{grid-template-columns:1fr;min-height:70vh;padding:28px 5vw}.profile-card{order:-1;align-items:start}}
+    @media (max-width:480px){nav{display:none}}
+
+    /* small utilities */
+    .pill{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-weight:700;color:var(--muted)}
+
+    /* animations */
+    .fade-up{opacity:0;transform:translateY(10px);animation:fadeUp .7s forwards}
+    @keyframes fadeUp{to{opacity:1;transform:none}}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,10,0.6);z-index:120}
+    .modal.show{display:flex}
+    .modal .panel{width:clamp(320px,74vw,820px);background:linear-gradient(180deg,#071018,#07161a);padding:18px;border-radius:12px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">AP</div>
+      <div>
+        <div style="font-weight:800">ABHINAV P K</div>
+        <div style="font-size:12px;color:var(--muted)">CSE Student — Government Engineering College Wayanad</div>
+      </div>
+    </div>
+
+    <nav aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="intro card fade-up">
+      <div class="subtitle">Hello — I'm</div>
+      <h1>ABHINAV P K</h1>
+      <p class="lead">I am a 24‑year‑old Computer Science & Engineering student (lateral entry) at Government Engineering College Wayanad, currently in my 4th year. I love building web apps, exploring AI, and solving real‑world problems with code.</p>
+
+      <div class="actions">
+        <button class="btn" onclick="scrollToSection('projects')">See Projects</button>
+        <a class="btn ghost" href="mailto:abhinav_23l109cs@gecwyd.ac.in">Email Me</a>
+        <a class="pill" href="https://github.com/abhnavv" target="_blank">GitHub</a>
+        <a class="pill" href="https://www.linkedin.com/in/abhinav-pk-b35363361" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+
+    <aside class="profile-card card fade-up" style="--delay:.12s">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="avatar">AP</div>
+        <div>
+          <div style="font-weight:800">ABHINAV P K</div>
+          <div class="meta">CSE Student • Age 24 • Kozhikode</div>
+        </div>
+      </div>
+
+      <div style="margin-top:8px">
+        <div style="font-weight:700;color:var(--accent);margin-bottom:6px">Contact</div>
+        <div class="meta">abhinav_23l109cs@gecwyd.ac.in</div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <a class="pill" href="#education">Education</a>
+        <a class="pill" href="#skills">Skills</a>
+        <a class="pill" href="#projects">Projects</a>
+      </div>
+    </aside>
+  </div>
+
+  <main>
+    <section id="about" class="card fade-up">
+      <h2>About</h2>
+      <p>I am pursuing B.Tech (lateral entry) in Computer Science at GEC Wayanad. I completed a Diploma in Computer Science & Engineering (2020–2023). My interests include web development, artificial intelligence, and building systems that solve real problems. Currently working on an AI‑based landslide detection & prediction project as my main B.Tech project.</p>
+    </section>
+
+    <section id="education" class="card fade-up">
+      <h2>Education</h2>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+        <div style="background:var(--glass);padding:12px;border-radius:8px">
+          <strong>Diploma in Computer Science & Engineering</strong>
+          <div class="meta">2020 — 2023</div>
+        </div>
+        <div style="background:var(--glass);padding:12px;border-radius:8px">
+          <strong>Lateral entry — B.Tech (CSE), GEC Wayanad</strong>
+          <div class="meta">Currently in 4th year</div>
+        </div>
+        <div style="background:var(--glass);padding:12px;border-radius:8px">
+          <strong>Plus Two — GMHSS CU Campus</strong>
+          <div class="meta">2018 — 2020</div>
+        </div>
+        <div style="background:var(--glass);padding:12px;border-radius:8px">
+          <strong>SSLC — GMHSS / CU Campus</strong>
+          <div class="meta">2018</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="card fade-up">
+      <h2>Skills</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div class="skill">
+          <div class="label">C / C++ <span>80%</span></div>
+          <div class="bar"><span style="width:80%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="label">Java <span>70%</span></div>
+          <div class="bar"><span style="width:70%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="label">Python <span>65%</span></div>
+          <div class="bar"><span style="width:65%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="label">React / Web <span>72%</span></div>
+          <div class="bar"><span style="width:72%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="label">HTML / CSS <span>78%</span></div>
+          <div class="bar"><span style="width:78%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="label">Tools: GitHub, OpenAI tools <span>60%</span></div>
+          <div class="bar"><span style="width:60%"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="card fade-up">
+      <h2>Projects</h2>
+      <div class="projects" style="margin-top:12px">
+        <div class="project" onclick="openProject('kudumbasree')">
+          <h3>Kudumbasree Waste Management Website</h3>
+          <p>Diploma project — a website for waste collection & community coordination.</p>
+        </div>
+
+        <div class="project" onclick="openProject('quantum')">
+          <h3>Quantum Vault — Password Manager</h3>
+          <p>Mini project at GEC Wayanad — secure password manager with simple UI.</p>
+        </div>
+
+        <div class="project" onclick="openProject('landslide')">
+          <h3>AI Landslide Detection & Prediction</h3>
+          <p>Main B.Tech project — building an AI model to detect & predict landslide risk.</p>
+        </div>
+
+        <div class="project" onclick="openProject('other')">
+          <h3>More Projects</h3>
+          <p>Other smaller course & personal projects in web and algorithms.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="card fade-up">
+      <h2>Contact</h2>
+      <p style="color:var(--muted)">Email: <a href="mailto:abhinav_23l109cs@gecwyd.ac.in">abhinav_23l109cs@gecwyd.ac.in</a></p>
+      <p style="color:var(--muted)">Location: Kozhikode</p>
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <a class="btn" href="https://github.com/abhnavv" target="_blank">View GitHub</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/abhinav-pk-b35363361" target="_blank">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>Made with ❤️ — ABHINAV P K</div>
+    <div style="color:var(--muted)">Want edits? Reply here and I'll update the file.</div>
+  </footer>
+
+  <!-- Modal for project details -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div id="modalContent"></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px">
+        <button class="btn ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // small helpers
+    function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+
+    // project modal
+    const projectData = {
+      kudumbasree: {title:'Kudumbasree Waste Management Website', body:'A diploma project that helps local communities organize waste pickup, shows schedules, and provides a simple admin interface. Tech: HTML, CSS, JS, PHP/MySQL (example).'},
+      quantum: {title:'Quantum Vault — Password Manager', body:'Mini project built at GEC Wayanad. A small secure password manager with local encryption and a clear UI. Tech: React / Node (example).'},
+      landslide: {title:'AI Landslide Detection & Prediction', body:'Main B.Tech project. Building a pipeline to analyze geospatial & sensor data, train models to predict landslide risk, and surface alerts. Tech: Python, TensorFlow/PyTorch, GIS data.'},
+      other: {title:'More Projects', body:'Other course projects: assessment manager, role-based login system, small web apps and algorithm problems.'}
+    }
+
+    function openProject(key){
+      const data = projectData[key] || {title:'Project', body:'Details coming soon.'}
+      document.getElementById('modalContent').innerHTML = `<h3 style="margin:0;color:var(--accent)">${data.title}</h3><p style="color:var(--muted);margin-top:8px">${data.body}</p>`;
+      document.getElementById('modal').classList.add('show')
+    }
+    function closeModal(){document.getElementById('modal').classList.remove('show')}
+
+    // animate skill bars on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.querySelectorAll('.bar > span').forEach(s => s.style.width = s.style.width || s.getAttribute('data-w') || s.style.width)
+          observer.unobserve(entry.target)
+        }
+      })
+    }, {threshold:0.2})
+
+    document.querySelectorAll('#skills, #projects, #education').forEach(el => observer.observe(el))
+
+    // set data-w attributes for semantics (already inline widths used)
+  </script>
+</body>
+</html>
+
